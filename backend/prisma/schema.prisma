@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+model User{
+  id Int @id @default(autoincrement())
+  username String @unique
+  email String @unique
+  password String
+  interviewReports Interviewreport[]
+}
+model Blacklist{
+  id        Int      @id @default(autoincrement())
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Interviewreport {
+  id              Int                @id @default(autoincrement())
+  userId          Int
+  user            User               @relation(fields: [userId], references: [id])
+  jobdescription  String
+  resume          String
+  selfdescription String
+  matchscore      Int
+  technicalQuestions Technicalquestion[]
+  behaviouralQuestions behaviouralquestion[]
+  skillGaps       Skillgap[]
+  preparationPlans Preparationplan[]
+}
+
+model Technicalquestion {
+  id               Int             @id @default(autoincrement())
+  question         String
+  intention        String
+  answer           String
+  interviewReport  Interviewreport @relation(fields: [interviewReportId], references: [id])
+  interviewReportId Int
+}
+
+model behaviouralquestion {
+  id               Int             @id @default(autoincrement())
+  question         String
+  intention        String
+  answer           String
+  interviewReport  Interviewreport @relation(fields: [interviewReportId], references: [id])
+  interviewReportId Int
+}
+
+enum Severity {
+  low
+  medium
+  high
+}
+
+model Skillgap {
+  id               Int             @id @default(autoincrement())
+  skill            String
+  severity         Severity
+  interviewReport  Interviewreport @relation(fields: [interviewReportId], references: [id])
+  interviewReportId Int
+}
+
+model Preparationplan {
+  id               Int             @id @default(autoincrement())
+  day              Int
+  focus            String
+  tasks            String[]
+  interviewReport  Interviewreport @relation(fields: [interviewReportId], references: [id])
+  interviewReportId Int
+}
+model Usercredentials{
+  id Int @id @default(autoincrement())
+  jobdescription String
+  selfdescription String
+  pdf String
+}
