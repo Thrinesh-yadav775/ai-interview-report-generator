@@ -5,7 +5,7 @@ const cookieparser=require('cookie-parser')
 const cors=require('cors')
 const app=express()
 app.use(cors({
-  origin: 'http://localhost:3001',
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'https://ai-interview-report-generator-snowy.vercel.app'],
   credentials: true,
 }))
 app.use(cookieparser())
