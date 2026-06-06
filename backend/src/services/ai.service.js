@@ -1,7 +1,7 @@
-const {GoogleGenAI}=require('@google/genai')
+const Groq=require('groq-sdk')
 const {z}=require('zod')
-const ai=new GoogleGenAI({
-    apiKey:process.env.GoogleGenAIkey
+const groq=new Groq({
+    apiKey:process.env.GroqAPIkey
 })
 const interviewreportschema=z.object({
     matchscore:z.number().describe("give a score how well a candidate is between o to 100"),
@@ -27,14 +27,11 @@ const interviewreportschema=z.object({
 })
 async function genratereport({resume,selfdescription,jobdescritption}){
     const prompt=`generate an interview report for a candidate with following details:Resume:${resume},selfdescribe:${selfdescription},jobdescribe:${jobdescritption}`
-    const response=await ai.models.generateContent({
-        model:"gemini-2.5-flash",
-        contents:prompt,
-        config:{
-            responseMimeType:"application/json",
-            responseSchema:z.toJSONSchema(interviewreportschema)
-        }
+    const response=await groq.chat.completions.create({
+        model:"llama-3.3-70b-versatile",
+        messages:[{role:"user",content:prompt}],
+        response_format:{type:"json_object"}
     })
-    return JSON.parse(response.text)
+    return JSON.parse(response.choices[0].message.content)
 }
 module.exports=genratereport
