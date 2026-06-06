@@ -28,7 +28,7 @@ const interviewreportschema=z.object({
 async function genratereport({resume,selfdescription,jobdescritption}){
     const prompt=`generate an interview report for a candidate with following details:Resume:${resume},selfdescribe:${selfdescription},jobdescribe:${jobdescritption}`
     const response=await ai.models.generateContent({
-        model:"gemini-1.5-flash",
+        model:"gemini-2.0-flash",
         contents:prompt,
         config:{
             responseMimeType:"application/json",
