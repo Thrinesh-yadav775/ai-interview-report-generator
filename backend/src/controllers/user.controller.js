@@ -68,7 +68,7 @@ async function login(req, res) {
       { expiresIn: "30d" },
     );
     res.cookie("token", token);
-    res.status(200).json({ message: "Login successfully" });
+    res.status(200).json({ message: "Login successfull" });
   } catch (err) {
     console.log(err);
     return res.status(400).json({ message: "error in registration " });
