@@ -1,5 +1,4 @@
 const prisma = require("../lib/db");
-const createurl = require("../services/pdf.services");
 const pdfparser = require("pdf-parse");
 const generateinterviewreport = require("../services/ai.service");
 async function createdata(req, res) {
@@ -9,8 +8,6 @@ async function createdata(req, res) {
       return res.status(400).json({message:"all fileds are required"})
     }
     const content = await pdfparser(req.file.buffer);
-    const buffer = req.file.buffer;
-    const result = await createurl(buffer);
     const interviewreportbyai = await generateinterviewreport({
       resume: content.text,
       selfdescription: selfdescription,
