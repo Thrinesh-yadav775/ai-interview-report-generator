@@ -1,6 +1,6 @@
 const prisma = require("../lib/db");
 const createurl = require("../services/pdf.services");
-const pdfparser = require("pdf-parse").default || require("pdf-parse");
+const pdfparser = require("pdf-parse");
 const generateinterviewreport = require("../services/ai.service");
 async function createdata(req, res) {
   try {
