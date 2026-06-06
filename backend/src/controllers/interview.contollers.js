@@ -7,9 +7,7 @@ async function createdata(req, res) {
   if(!selfdescription||!jobdescription||!req.file){
     return res.status(400).json({message:"all fileds are required"})
   }
-  const content = await new pdfparser.PDFParse(
-    Uint8Array.from(req.file.buffer),
-  ).getText();
+  const content = await pdfparser(req.file.buffer);
   const buffer = req.file.buffer;
   const result = await createurl(buffer);
   const interviewreportbyai = await generateinterviewreport({

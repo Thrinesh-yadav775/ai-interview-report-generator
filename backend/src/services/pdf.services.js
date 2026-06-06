@@ -1,6 +1,8 @@
 const Imagekit=require('@imagekit/nodejs')
 const imagekit=new Imagekit({
-    privateKey:process.env.imagekitkey
+    privateKey:process.env.imagekitkey,
+    publicKey:process.env.imagekitpublickey,
+    urlEndpoint:process.env.imagekiturlendpoint
 })
 async function createurl(Buffer){
     const res=await imagekit.files.upload({
