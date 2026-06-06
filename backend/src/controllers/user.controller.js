@@ -31,7 +31,7 @@ async function register(req, res) {
       },
       process.env.tokenkey,
     );
-    res.cookie("token", token);
+    res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true });
     res.status(200).json({ message: "user registered successfully" });
   } catch (err) {
     console.log(err);
@@ -67,7 +67,7 @@ async function login(req, res) {
       process.env.tokenkey,
       { expiresIn: "30d" },
     );
-    res.cookie("token", token);
+    res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true });
     res.status(200).json({ message: "Login successfull" });
   } catch (err) {
     console.log(err);
