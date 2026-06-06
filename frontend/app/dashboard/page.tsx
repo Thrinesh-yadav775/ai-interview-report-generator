@@ -46,7 +46,7 @@ export default function Dashboard() {
       setSuccess(true);
       setTimeout(() => setSuccess(false), 4000);
     } catch (err: any) {
-      setError(err?.response?.data?.message ?? "Something went wrong. Please try again.");
+      setError("Something went wrong. Please try again later.");
     }
     setIsLoading(false);
   }
