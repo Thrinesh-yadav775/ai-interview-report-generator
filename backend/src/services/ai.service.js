@@ -26,7 +26,19 @@ const interviewreportschema=z.object({
     })).describe('a day wise plan for the candiadates to follow in the the preparation')
 })
 async function genratereport({resume,selfdescription,jobdescritption}){
-    const prompt=`generate an interview report for a candidate with following details:Resume:${resume},selfdescribe:${selfdescription},jobdescribe:${jobdescritption}`
+    const prompt=`Generate an interview report for a candidate and return ONLY a JSON object with exactly this structure:
+{
+  "matchscore": <number 0-100>,
+  "technicalquestion": [{"question": "", "intention": "", "answer": ""}],
+  "behaviouralquestion": [{"question": "", "intention": "", "answer": ""}],
+  "skillgap": [{"skill": "", "severity": "low|medium|high"}],
+  "Preparationplan": [{"day": <number>, "focus": "", "tasks": [""]}]
+}
+
+Candidate details:
+Resume: ${resume}
+Self description: ${selfdescription}
+Job description: ${jobdescritption}`
     const response=await groq.chat.completions.create({
         model:"llama-3.3-70b-versatile",
         messages:[{role:"user",content:prompt}],
