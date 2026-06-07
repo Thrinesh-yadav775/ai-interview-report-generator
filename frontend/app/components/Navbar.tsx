@@ -36,24 +36,24 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => router.push("/login")}
-              className="text-sm font-medium text-slate-300 hover:text-white px-4 py-1.5 rounded-xl hover:bg-slate-700/50 transition-all duration-200"
+              className="hidden sm:block text-sm font-medium text-slate-300 hover:text-white px-4 py-1.5 rounded-xl hover:bg-slate-700/50 transition-all duration-200"
             >
               Login
             </button>
             <button
               onClick={() => router.push("/register")}
-              className="text-sm font-medium text-slate-300 hover:text-white px-4 py-1.5 rounded-xl hover:bg-slate-700/50 transition-all duration-200"
+              className="hidden sm:block text-sm font-medium text-slate-300 hover:text-white px-4 py-1.5 rounded-xl hover:bg-slate-700/50 transition-all duration-200"
             >
               Register
             </button>
             <button
               onClick={handleLogout}
-              className="flex items-center gap-1.5 text-sm font-semibold text-white px-4 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 shadow-md shadow-blue-600/25 transition-all duration-200"
+              className="flex items-center gap-1.5 text-sm font-semibold text-white px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 shadow-md shadow-blue-600/25 transition-all duration-200"
             >
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
               </svg>
-              Logout
+              <span className="hidden sm:inline">Logout</span>
             </button>
           </div>
         </div>
